@@ -1,4 +1,6 @@
 class ShippingMode < ApplicationRecord
+  has_many :orders
+
   validates :title, presence: true,
                     uniqueness: true
 
