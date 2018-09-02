@@ -1,0 +1,8 @@
+<h1>Products</h1>
+
+<% @products.each do |product| %>
+  <%= image_tag product.image_url %>
+  <%= product.title %>
+<% end %>
+
+<%= paginate @products %>
