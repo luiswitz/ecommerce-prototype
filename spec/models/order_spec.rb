@@ -45,5 +45,11 @@ RSpec.describe Order, type: :model do
 
       expect(association.macro).to eq(:belongs_to)
     end
+
+    it 'has many order_items' do
+      association = described_class.reflect_on_association(:order_items)
+
+      expect(association.macro).to eq(:has_many)
+    end
   end
 end
