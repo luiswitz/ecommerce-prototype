@@ -56,18 +56,6 @@ RSpec.describe Endpoints::Orders::AddProductToOrderEndpoint do
           expect(order.order_items.first.quantity).to eq(2)
         end
       end
-
-      it 'returns a success message' do
-        expect(perform).to match(/Product added to your order/)
-      end
-    end
-
-    context 'with invalid parameters' do
-      let(:quantity) { -1 }
-
-      it 'returns an error message' do
-        expect(perform).to match(/Quantity must be greater than or equal to 1/)
-      end
     end
   end
 end
