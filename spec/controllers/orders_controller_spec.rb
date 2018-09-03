@@ -46,4 +46,12 @@ RSpec.describe OrdersController, type: :controller do
       expect(flash[:notice]).to be_present
     end
   end
+
+  describe '#GET show' do
+    it 'responds successfully' do
+      get :show
+
+      expect(response).to be_successful
+    end
+  end
 end

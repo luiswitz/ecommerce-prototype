@@ -1,4 +1,8 @@
 class OrdersController < ApplicationController
+  def show
+    @order = current_order
+  end
+
   def add_item
     endpoint = Endpoints::Orders::AddProductToOrderEndpoint.new
 
