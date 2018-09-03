@@ -1,3 +1,7 @@
+#Orders 
+OrderItem.delete_all
+Order.delete_all
+
 # Products
 
 Product.delete_all
