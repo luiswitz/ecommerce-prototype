@@ -1,0 +1,14 @@
+<td><%= order_item.product.title %></td> 
+<td><%= order_item.product.price %></td>
+<td><%= order_item.quantity %></td>
+<td><%= order_item.total_price %></td>
+<% if actions %>
+  <td><%= link_to 'Edit', edit_order_item_path(order_item) %></td>
+  <td>
+    <%= link_to 'Delete', 
+      url_for(controller: :order_items, action: :destroy, id: order_item.id),
+      method: :delete,
+      data: { confirm: 'Are you sure?' }
+    %>
+  </td>
+<% end %>
