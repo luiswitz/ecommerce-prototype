@@ -1,7 +1,5 @@
 <h1>Products</h1>
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>"><%= value %></div>
-<% end %>
+
 <% @products.each do |product| %>
   <%= image_tag product.image_url %>
   <%= product.title %>
@@ -9,7 +7,7 @@
 
   <%= form_tag orders_add_item_path, method: :post do %>
     <%= hidden_field_tag :product_id, product.id %>
-    <%= number_field_tag :quantity, { min: 1 } %>
+    <%= number_field_tag :quantity, {}, { min: 1 } %>
 
     <%= submit_tag 'Buy' %>
   <% end %>
