@@ -3,6 +3,24 @@ class OrdersController < ApplicationController
     @order = current_order
   end
 
+  def checkout
+    @order = current_order
+  end
+
+  def update
+    endpoint = Endpoints::Orders::UpdateEndpoint.new
+
+    order = endpoint.perform(
+      id: current_order.id,
+      name: params[:name],
+      email: params[:email],
+      address: params[:address],
+      shipping_mode_id: params[:shipping_mode_id].to_i
+    )
+
+    redirect_to orders_checkout_path, notice: handle_ar_messages(order)
+  end
+
   def add_item
     endpoint = Endpoints::Orders::AddProductToOrderEndpoint.new
 

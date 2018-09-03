@@ -54,4 +54,60 @@ RSpec.describe OrdersController, type: :controller do
       expect(response).to be_successful
     end
   end
+
+  describe '#GET checkout' do
+    it 'responds successfully' do
+      get :checkout
+
+      expect(response).to be_successful
+    end
+  end
+
+  describe '#PATCH update' do
+    let(:update_order_endpoint) do
+      Endpoints::Orders::UpdateEndpoint
+    end
+
+    let(:params) do
+      {
+        id: current_order.id,
+        name: 'the-name',
+        email: 'the-email',
+        address: 'the-address',
+        shipping_mode_id: 1
+      }
+    end
+
+    let(:current_order) { double(:current_order, id: 1) }
+
+    before do
+      allow_any_instance_of(update_order_endpoint)
+        .to receive(:perform)
+        .with(
+          id: current_order.id,
+          name: 'the-name',
+          email: 'the-email',
+          address: 'the-address',
+          shipping_mode_id: 1
+        )
+
+      allow_any_instance_of(ApplicationController)
+        .to receive(:current_order)
+        .and_return(current_order)
+    end
+
+    it 'delegates update to update order endpoint' do
+      expect_any_instance_of(update_order_endpoint)
+        .to receive(:perform)
+        .with(
+          id: current_order.id,
+          name: 'the-name',
+          email: 'the-email',
+          address: 'the-address',
+          shipping_mode_id: 1
+        )
+
+      patch :update, params: params
+    end
+  end
 end
