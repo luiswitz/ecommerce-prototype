@@ -4,4 +4,8 @@ class OrderItem < ApplicationRecord
 
   validates :quantity, presence: true,
                        numericality: { greater_than_or_equal_to: 1 }
+
+  def total_price
+    product.price.to_f * quantity.to_f
+  end
 end

@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe OrderItem, type: :model do
   let(:order_item) do
-    FactoryBot.create(:order_item)
+    FactoryBot.create(:order_item, product: product, quantity: 10)
+  end
+
+  let(:product) do
+    FactoryBot.create(:product, price: 100)
   end
 
   describe 'validations' do
@@ -50,6 +54,12 @@ RSpec.describe OrderItem, type: :model do
       association = described_class.reflect_on_association(:product)
 
       expect(association.macro).to eq(:belongs_to)
+    end
+  end
+
+  describe '#total_price' do
+    it 'returns the order_item total price' do
+      expect(order_item.total_price).to eq(1000)
     end
   end
 end
