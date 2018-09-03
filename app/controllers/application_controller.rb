@@ -12,4 +12,9 @@ class ApplicationController < ActionController::Base
     session[:order_id] = order.id
     order
   end
+
+  def handle_ar_messages(ar_object)
+    handler = Handlers::ActiveRecordMessageHandler.new
+    handler.handle(ar_object)
+  end
 end
