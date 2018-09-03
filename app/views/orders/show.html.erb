@@ -18,6 +18,7 @@
         <td><%= order_item.product.price %></td>
         <td><%= order_item.quantity %></td>
         <td><%= order_item.total_price %></td>
+        <td><%= link_to 'Edit', edit_order_item_path(order_item) %></td>
       </tr>
     <% end %>
   </tbody>
