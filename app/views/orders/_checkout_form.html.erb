@@ -1,0 +1,19 @@
+<%= form_tag orders_update_path, method: :patch do %>
+  <%= label_tag :name, nil, class: 'mt-3' %>
+  <%= text_field_tag :name, nil, class: 'form-control' %>
+  <%= label_tag :email, nil, class: 'mt-3' %>
+  <%= email_field_tag :email, nil, class: 'form-control' %>
+  <%= label_tag :address, nil, class: 'mt-3' %>
+  <%= text_field_tag :address, nil, class: 'form-control' %>
+  <%= label_tag :shipping_mode, nil, class: 'mt-3'%>
+  <%= select_tag :shipping_mode_id, 
+    options_from_collection_for_select(
+      ShippingMode.all,
+      :id,
+      :title
+  ),
+  class: 'form-control'
+%>
+
+  <%= submit_tag 'Order', class: 'btn btn-success btn-block mt-4' %>
+<% end %>
