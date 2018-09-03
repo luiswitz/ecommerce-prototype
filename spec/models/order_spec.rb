@@ -58,4 +58,18 @@ RSpec.describe Order, type: :model do
       expect(association.macro).to eq(:has_many)
     end
   end
+
+  describe '#total_products_price' do
+    before do
+      product_1 = FactoryBot.create(:product, price: 10)
+      product_2 = FactoryBot.create(:product, price: 10)
+
+      OrderItem.create(order: order, product: product_1, quantity: 1)
+      OrderItem.create(order: order, product: product_2, quantity: 10)
+    end
+
+    it 'returns the total price of the order' do
+      expect(order.total_products_price).to eq(110)
+    end
+  end
 end

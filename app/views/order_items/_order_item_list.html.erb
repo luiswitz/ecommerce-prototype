@@ -1,0 +1,21 @@
+<table class="table table-striped mt-4">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total Line</th>
+      <% if actions %>
+        <th></th>
+        <th></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% order.order_items.each do |order_item| %>
+      <tr>
+        <%= render 'order_items/order_item_row', { order_item: order_item, actions: actions } %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
