@@ -1,0 +1,7 @@
+<h1>Edit Order Item</h1>
+
+<%= form_tag order_item_path, method: :patch do %>
+  <%= number_field_tag :quantity, @order_item.quantity, { min: 1 } %>
+
+  <%= submit_tag 'Update' %>
+<% end %>
