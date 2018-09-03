@@ -1,0 +1,44 @@
+<h1>Checkout</h1>
+
+<%= form_tag orders_update_path, method: :patch do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name %> <br>
+  <%= label_tag :email %>
+  <%= email_field_tag :email %><br>
+  <%= label_tag :address %>
+  <%= text_field_tag :address %><br>
+  <%= label_tag :shipping_mode %>
+  <%= select_tag :shipping_mode_id, 
+    options_from_collection_for_select(
+      ShippingMode.all,
+      :id,
+      :title
+    ) 
+  %>
+  <br>
+  
+  <%= submit_tag 'Order' %>
+<% end %>
+
+<h2>Products</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Total Line</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_items.each do |order_item| %>
+      <tr>
+        <td><%= order_item.product.title %></td> 
+        <td><%= order_item.product.price %></td>
+        <td><%= order_item.quantity %></td>
+        <td><%= order_item.total_price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
