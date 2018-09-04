@@ -15,10 +15,11 @@ class OrdersController < ApplicationController
       name: params[:name],
       email: params[:email],
       address: params[:address],
-      shipping_mode_id: params[:shipping_mode_id].to_i
+      shipping_mode_id: params[:shipping_mode_id].to_i,
+      status: :ordered
     )
 
-    redirect_to orders_checkout_path, notice: handle_ar_messages(order)
+    redirect_to invoice_path(order.id), notice: handle_ar_messages(order)
   end
 
   def add_item

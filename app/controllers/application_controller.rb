@@ -5,7 +5,11 @@ class ApplicationController < ActionController::Base
 
   def current_order
     if session[:order_id]
-      return Order.find(session[:order_id])
+      order = Order.find_by(id: session[:order_id], status: :in_progress)
+
+      if order
+        return order
+      end
     end
 
     order = Order.create
