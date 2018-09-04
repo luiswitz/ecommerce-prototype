@@ -1,0 +1,22 @@
+<div class="row">
+  <h2>Payment Details</h2>
+
+  <table class="table">
+    <tr>
+      <td>Subtotal</td>
+      <td><%= order.total_products_price %></td>
+    </tr>
+    <tr>
+      <td>Taxes</td>
+      <td><%= order.total_tax %></td>
+    </tr>
+    <tr>
+      <td>Shipping</td>
+      <td><%= order.shipping_mode.price %></td>
+    </tr>
+    <tr>
+      <td><strong>Total</strong></td>
+      <td><strong><%= order.total_price %></strong></td>
+    </tr>
+  </table>
+</div>

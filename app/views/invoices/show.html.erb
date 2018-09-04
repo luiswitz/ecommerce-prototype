@@ -1,0 +1,8 @@
+<h1>Invoice from order #<%= @order.id %></h1>
+
+<%= render 'invoices/invoice_header', { order: @order } %>
+
+<h2>Products</h2>
+<%= render 'order_items/order_item_list', { order: @order, actions: false } %>
+
+<%= render 'invoices/total_invoice', { order: @order } %>

@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   patch 'orders/update', 'orders#update'
 
   resources :order_items, only: [:edit, :update, :destroy]
+  resources :invoices, only: [:show]
 end
