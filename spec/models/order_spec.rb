@@ -5,6 +5,14 @@ RSpec.describe Order, type: :model do
     FactoryBot.create(:order)
   end
 
+  before do
+    product_1 = FactoryBot.create(:product, price: 10)
+    product_2 = FactoryBot.create(:product, price: 10)
+
+    OrderItem.create(order: order, product: product_1, quantity: 1)
+    OrderItem.create(order: order, product: product_2, quantity: 10)
+  end
+
   describe 'validations' do
     context 'an invalid order' do
       it 'is not valid without a name' do
@@ -60,16 +68,23 @@ RSpec.describe Order, type: :model do
   end
 
   describe '#total_products_price' do
-    before do
-      product_1 = FactoryBot.create(:product, price: 10)
-      product_2 = FactoryBot.create(:product, price: 10)
-
-      OrderItem.create(order: order, product: product_1, quantity: 1)
-      OrderItem.create(order: order, product: product_2, quantity: 10)
-    end
 
     it 'returns the total price of the order' do
       expect(order.total_products_price).to eq(110)
+    end
+  end
+
+  describe '#total_tax' do
+    it 'returns tax value' do
+      expect(order.total_tax).to eq(1.43)
+    end
+  end
+
+  describe '#total_price' do
+    it 'returns the final price of order' do
+      expected_total = order.shipping_mode.price + 111.43
+
+      expect(order.total_price).to eq(expected_total)
     end
   end
 end
