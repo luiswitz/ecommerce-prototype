@@ -15,12 +15,13 @@ RSpec.describe Endpoints::Orders::UpdateEndpoint do
       name: 'the-name',
       email: 'the-email',
       address: 'the-address',
-      shipping_mode_id: shipping_mode.id
+      shipping_mode_id: shipping_mode.id,
+      status: :ordered
     }
   end
 
   let(:current_order) do
-    FactoryBot.create(:order)
+    FactoryBot.create(:order, status: :in_progress)
   end
 
   let(:shipping_mode) do
@@ -37,6 +38,7 @@ RSpec.describe Endpoints::Orders::UpdateEndpoint do
       expect(current_order.email).to eq('the-email')
       expect(current_order.address).to eq('the-address')
       expect(current_order.shipping_mode_id).to eq(shipping_mode.id)
+      expect(current_order.status).to eq('ordered')
     end
   end
 end

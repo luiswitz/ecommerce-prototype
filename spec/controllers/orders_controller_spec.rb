@@ -74,11 +74,16 @@ RSpec.describe OrdersController, type: :controller do
         name: 'the-name',
         email: 'the-email',
         address: 'the-address',
-        shipping_mode_id: 1
+        shipping_mode_id: 1,
+        status: :ordered
       }
     end
 
     let(:current_order) { double(:current_order, id: 1) }
+    
+    let(:finished_order) do
+      FactoryBot.create(:order, status: :ordered)
+    end
 
     before do
       allow_any_instance_of(update_order_endpoint)
@@ -88,8 +93,9 @@ RSpec.describe OrdersController, type: :controller do
           name: 'the-name',
           email: 'the-email',
           address: 'the-address',
-          shipping_mode_id: 1
-        )
+          shipping_mode_id: 1,
+          status: :ordered
+      )
 
       allow_any_instance_of(ApplicationController)
         .to receive(:current_order)
@@ -104,8 +110,9 @@ RSpec.describe OrdersController, type: :controller do
           name: 'the-name',
           email: 'the-email',
           address: 'the-address',
-          shipping_mode_id: 1
-        )
+          shipping_mode_id: 1,
+          status: :ordered
+        ).and_return(finished_order)
 
       patch :update, params: params
     end

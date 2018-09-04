@@ -8,6 +8,7 @@ module Endpoints
         order.email = params[:email]
         order.address = params[:address]
         order.shipping_mode_id = params[:shipping_mode_id]
+        order.status = params[:status]
 
         order.save
         
