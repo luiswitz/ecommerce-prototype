@@ -1,24 +1,47 @@
-# README
+# Ecommerce Prototype
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project is a concept of an ecommerce.
 
-Things you may want to cover:
+It has just basic functionality like:
+- create orders
+- add products to the order
+- remove products from the order
+- edit products from the order
 
-* Ruby version
+Every time an order is finished, another one is created and the shopping starts at the beginning again.
 
-* System dependencies
+## Setup
 
-* Configuration
+To get the project up and running, follow this steps:
 
-* Database creation
+Build docker image
+```
+docker-compose build
+```
 
-* Database initialization
+Create database
+```
+docker-compose run --rm app bundle exec rails db:create
+```
 
-* How to run the test suite
+Run migrations
+```
+docker-compose run --rm app bundle exec rails db:migrate
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Fill database with data
+```
+docker-compose run --rm app bundle exec rails db:seed
+```
 
-* Deployment instructions
+Run project
+```
+docker-compose up
+```
 
-* ...
+## Running tests
+
+In order to run the tests, execute the following command
+```
+docker-compose run --rm app bundle exec rspec
+```
